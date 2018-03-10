@@ -1,16 +1,23 @@
 package au.com.mealplanner.mealplanner.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import au.com.mealplanner.mealplanner.R
+import au.com.mealplanner.mealplanner.addMeal.AddMealActivity
 import au.com.mealplanner.mealplanner.base.BaseActivity
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : BaseActivity(), MainView {
+    override fun goToAddMeal() {
+        val intent = Intent(this, AddMealActivity::class.java)
+        startActivity(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+        var presenter = MainActivityPresenter()
 
         val dayOfWeekList = ArrayList<String>()
         dayOfWeekList.add("Monday")
@@ -22,6 +29,6 @@ class MainActivity : BaseActivity(), MainView {
         dayOfWeekList.add("Sunday")
 
         weekly_plan_recycler_view.layoutManager = LinearLayoutManager(this)
-        weekly_plan_recycler_view.adapter = WeeklyPlanAdapter(dayOfWeekList)
+        weekly_plan_recycler_view.adapter = WeeklyPlanAdapter(dayOfWeekList, presenter)
     }
 }
