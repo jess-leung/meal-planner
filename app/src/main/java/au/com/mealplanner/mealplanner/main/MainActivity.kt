@@ -18,6 +18,7 @@ class MainActivity : BaseActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         var presenter = MainActivityPresenter()
+        presenter.setView(this)
 
         val dayOfWeekList = ArrayList<String>()
         dayOfWeekList.add("Monday")

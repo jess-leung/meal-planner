@@ -1,8 +1,5 @@
 package au.com.mealplanner.mealplanner.main
 
-import android.content.Context
-import android.content.Intent
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import au.com.mealplanner.mealplanner.R
-import au.com.mealplanner.mealplanner.addMeal.AddMealActivity
 import au.com.mealplanner.mealplanner.main.WeeklyPlanAdapter.WeeklyPlanViewHolder
 
 class WeeklyPlanAdapter(dayOfWeekList: List<String>, presenter: MainActivityPresenter) : RecyclerView.Adapter<WeeklyPlanViewHolder>() {
