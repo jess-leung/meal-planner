@@ -1,4 +1,4 @@
-package au.com.mealplanner.mealplanner.main
+package au.com.mealplanner.mealplanner.feature.main
 
 import au.com.mealplanner.mealplanner.base.BasePresenter
 

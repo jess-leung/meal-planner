@@ -1,4 +1,4 @@
-package au.com.mealplanner.mealplanner.main
+package au.com.mealplanner.mealplanner.feature.main
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import au.com.mealplanner.mealplanner.R
-import au.com.mealplanner.mealplanner.main.WeeklyPlanAdapter.WeeklyPlanViewHolder
+import au.com.mealplanner.mealplanner.feature.main.WeeklyPlanAdapter.WeeklyPlanViewHolder
 
 class WeeklyPlanAdapter(dayOfWeekList: List<String>, presenter: MainActivityPresenter) : RecyclerView.Adapter<WeeklyPlanViewHolder>() {
 

@@ -5,7 +5,7 @@
     android:id="@+id/root_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="au.com.mealplanner.mealplanner.main.MainActivity"
+    tools:context="au.com.mealplanner.mealplanner.feature.main.MainActivity"
     android:background="@color/lightGrey"
     android:padding="16dp">
 
