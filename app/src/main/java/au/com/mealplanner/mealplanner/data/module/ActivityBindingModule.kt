@@ -8,10 +8,10 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBindingModule {
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = arrayOf(ActivityModule::class ))
     abstract fun contributeMainActivity(): MainActivity
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = arrayOf(ActivityModule::class ))
     abstract fun contributeAddMealActivity(): AddMealActivity
 
 }
