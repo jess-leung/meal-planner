@@ -1,4 +1,4 @@
-package au.com.mealplanner.mealplanner.data.module
+package au.com.mealplanner.mealplanner.data.di.module
 
 import au.com.mealplanner.mealplanner.feature.addMeal.AddMealActivity
 import au.com.mealplanner.mealplanner.feature.main.MainActivity

@@ -2,7 +2,7 @@ package au.com.mealplanner.mealplanner
 
 import android.app.Activity
 import android.app.Application
-import au.com.mealplanner.mealplanner.data.component.DaggerAppComponent
+import au.com.mealplanner.mealplanner.data.di.component.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject

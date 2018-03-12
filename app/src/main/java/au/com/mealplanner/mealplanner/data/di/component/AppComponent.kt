@@ -1,14 +1,15 @@
-package au.com.mealplanner.mealplanner.data.component
+package au.com.mealplanner.mealplanner.data.di.component
 
 import android.app.Application
 import au.com.mealplanner.mealplanner.MealPlannerApplication
-import au.com.mealplanner.mealplanner.data.module.ActivityBindingModule
-import au.com.mealplanner.mealplanner.data.module.ActivityModule
+import au.com.mealplanner.mealplanner.data.di.module.ActivityBindingModule
+import au.com.mealplanner.mealplanner.data.di.module.ActivityModule
+import au.com.mealplanner.mealplanner.data.di.module.DatabaseModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 
-@Component(modules = arrayOf(ActivityBindingModule::class, ActivityModule::class))
+@Component(modules = arrayOf(ActivityBindingModule::class, ActivityModule::class, DatabaseModule::class))
 interface AppComponent : AndroidInjector<MealPlannerApplication> {
     fun inject(application: Application)
 
