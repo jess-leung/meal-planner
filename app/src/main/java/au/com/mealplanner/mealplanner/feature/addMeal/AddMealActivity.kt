@@ -5,7 +5,6 @@ import android.support.design.widget.Snackbar.LENGTH_LONG
 import android.support.design.widget.Snackbar.make
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ArrayAdapter
 import au.com.mealplanner.mealplanner.R
 import au.com.mealplanner.mealplanner.base.BaseActivity
 import au.com.mealplanner.mealplanner.data.model.Meal
@@ -14,6 +13,9 @@ import kotlinx.android.synthetic.main.add_meal_activity.*
 import javax.inject.Inject
 
 class AddMealActivity : BaseActivity(), AddMealView {
+    override fun getLayoutId(): Int {
+        return R.layout.add_meal_activity
+    }
 
     @Inject
     lateinit var presenter: AddMealPresenter
@@ -30,15 +32,11 @@ class AddMealActivity : BaseActivity(), AddMealView {
         make(add_meal_container, "Oops", LENGTH_LONG).show()
     }
 
-    override fun setUpMealTypeSpinner(values: Array<AddMealPresenter.MealType>) {
-        meal_type_spinner.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, values)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.add_meal_activity)
         presenter.setView(this)
-        presenter.setUpMealTypes()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_white)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,8 +46,13 @@ class AddMealActivity : BaseActivity(), AddMealView {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.confirm_action -> presenter.onConfirmAddMeal(meal_name_editText.text.toString(), AddMealPresenter.MealType.BREAKFAST)
+            R.id.confirm_action -> presenter.onConfirmAddMeal(meal_name_editText.text.toString())
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

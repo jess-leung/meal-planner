@@ -11,6 +11,9 @@ import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView {
+    override fun getLayoutId(): Int {
+        return R.layout.main_activity
+    }
 
     @Inject
     lateinit var presenter: MainActivityPresenter
@@ -26,7 +29,6 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
         presenter.setView(this)
 
         val dayOfWeekList = ArrayList<String>()

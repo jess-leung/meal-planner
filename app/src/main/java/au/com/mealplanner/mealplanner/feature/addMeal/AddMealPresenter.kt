@@ -11,16 +11,11 @@ class AddMealPresenter : BasePresenter<AddMealView>() {
         SNACK
     }
 
-    fun setUpMealTypes() {
-        val values = MealType.values()
-        getView()?.setUpMealTypeSpinner(values)
-    }
-
-    fun onConfirmAddMeal(mealName: String, mealType: MealType) {
+    fun onConfirmAddMeal(mealName: String) {
         if (mealName.isEmpty()) {
             getView()?.showError()
         } else {
-          getView()?.saveMealToDatabase(Meal(mealName, mealType))
+          getView()?.saveMealToDatabase(Meal(mealName))
         }
     }
 

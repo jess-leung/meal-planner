@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_container"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_meal_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="au.com.mealplanner.mealplanner.feature.main.MainActivity"
     android:background="@color/lightGrey"
-    android:padding="16dp">
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/weekly_plan_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="16dp"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

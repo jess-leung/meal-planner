@@ -1,7 +1,5 @@
 package au.com.mealplanner.mealplanner.feature.addMeal
 
-import au.com.mealplanner.mealplanner.feature.addMeal.AddMealPresenter.MealType.BREAKFAST
-import au.com.mealplanner.mealplanner.feature.addMeal.AddMealPresenter.MealType.LUNCH
 import au.com.mealplanner.mealplanner.data.model.Meal
 import org.junit.Before
 import org.junit.Test
@@ -21,16 +19,16 @@ class AddMealPresenterTest {
 
     @Test
     fun shouldShowErrorGivenNoMealName() {
-        presenter.onConfirmAddMeal("", BREAKFAST)
+        presenter.onConfirmAddMeal("")
 
         verify(addMealView).showError()
     }
 
     @Test
     fun shouldSaveMealToDatabaseOnConfirmAddMealGivenMealNameAndMealType() {
-        presenter.onConfirmAddMeal("Beef Pho", LUNCH)
+        presenter.onConfirmAddMeal("Beef Pho")
 
-        var meal: Meal = Meal("Beef Pho", LUNCH)
+        var meal: Meal = Meal("Beef Pho")
         verify(addMealView).saveMealToDatabase(meal)
     }
 }
