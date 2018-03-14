@@ -8,7 +8,9 @@ import au.com.mealplanner.mealplanner.data.di.module.DatabaseModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = arrayOf(ActivityBindingModule::class, ActivityModule::class, DatabaseModule::class))
 interface AppComponent : AndroidInjector<MealPlannerApplication> {
     fun inject(application: Application)
@@ -16,7 +18,7 @@ interface AppComponent : AndroidInjector<MealPlannerApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun app(application: Application): Builder
+        fun app(application: MealPlannerApplication): Builder
         fun build(): AppComponent
     }
 }

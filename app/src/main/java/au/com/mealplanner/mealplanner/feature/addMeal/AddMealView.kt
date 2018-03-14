@@ -5,5 +5,5 @@ import au.com.mealplanner.mealplanner.data.model.Meal
 
 interface AddMealView : BaseView {
     fun showError()
-    fun saveMealToDatabase(meal: Meal)
+    fun goToMealPlanWithNewMeal(meal: Meal)
 }

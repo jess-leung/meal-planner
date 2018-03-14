@@ -1,5 +1,6 @@
 package au.com.mealplanner.mealplanner.feature.addMeal
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar.LENGTH_LONG
 import android.support.design.widget.Snackbar.make
@@ -8,11 +9,20 @@ import android.view.MenuItem
 import au.com.mealplanner.mealplanner.R
 import au.com.mealplanner.mealplanner.base.BaseActivity
 import au.com.mealplanner.mealplanner.data.model.Meal
+import au.com.mealplanner.mealplanner.feature.main.MainActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.add_meal_activity.*
+import java.io.Serializable
 import javax.inject.Inject
 
 class AddMealActivity : BaseActivity(), AddMealView {
+    override fun goToMealPlanWithNewMeal(meal: Meal) {
+        var intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("added_meal", meal as Serializable)
+        setResult(RESULT_OK, intent);
+        finish()
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.add_meal_activity
     }
@@ -22,10 +32,6 @@ class AddMealActivity : BaseActivity(), AddMealView {
 
     override fun inject() {
         AndroidInjection.inject(this)
-    }
-
-    override fun saveMealToDatabase(meal: Meal) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showError() {

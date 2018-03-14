@@ -1,13 +1,13 @@
 package au.com.mealplanner.mealplanner.data.di.module
 
+import android.arch.persistence.room.Room
 import au.com.mealplanner.mealplanner.MealPlannerApplication
 import au.com.mealplanner.mealplanner.data.db.MealPlannerDatabase
+import au.com.mealplanner.mealplanner.data.db.dao.MealDao
+import au.com.mealplanner.mealplanner.data.db.repository.MealRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
-import android.arch.persistence.room.Room
-import au.com.mealplanner.mealplanner.data.db.dao.MealDao
-import au.com.mealplanner.mealplanner.data.db.repository.MealRepository
 
 
 @Module
@@ -29,4 +29,5 @@ class DatabaseModule {
     fun providesMealRepository(mealDao: MealDao): MealRepository {
         return MealRepository(mealDao)
     }
+
 }
