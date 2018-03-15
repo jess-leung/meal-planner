@@ -9,10 +9,10 @@ import android.widget.TextView
 import au.com.mealplanner.mealplanner.R
 import au.com.mealplanner.mealplanner.feature.main.WeeklyPlanAdapter.WeeklyPlanViewHolder
 
-class WeeklyPlanAdapter(dayOfWeekList: List<String>, presenter: MainActivityPresenter) : RecyclerView.Adapter<WeeklyPlanViewHolder>() {
+class WeeklyPlanAdapter(dayOfWeekList: List<String>, presenter: WeeklyPlanActivityPresenter) : RecyclerView.Adapter<WeeklyPlanViewHolder>() {
 
     val weekList: List<String> = dayOfWeekList
-    val presenter: MainActivityPresenter = presenter
+    val presenter: WeeklyPlanActivityPresenter = presenter
 
     override fun onBindViewHolder(holder: WeeklyPlanViewHolder?, position: Int) {
         val dayOfWeek = weekList.get(position)

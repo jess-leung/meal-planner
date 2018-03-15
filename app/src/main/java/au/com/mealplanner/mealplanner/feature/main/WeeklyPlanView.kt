@@ -1,5 +1,5 @@
 package au.com.mealplanner.mealplanner.feature.main
 
-interface MainView {
+interface WeeklyPlanView {
     fun goToAddMeal()
 }

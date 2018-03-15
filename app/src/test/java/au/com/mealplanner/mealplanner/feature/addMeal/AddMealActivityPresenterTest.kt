@@ -11,8 +11,8 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class AddMealPresenterTest {
-    private lateinit var presenter: AddMealPresenter
+class AddMealActivityPresenterTest {
+    private lateinit var activityPresenter: AddMealActivityPresenter
     private lateinit var addMealView: AddMealView
     private lateinit var mealRepository: MealRepository
 
@@ -21,13 +21,13 @@ class AddMealPresenterTest {
         addMealView = mock(AddMealView::class.java)
         mealRepository = mock(MealRepository::class.java)
 
-        presenter = AddMealPresenter(mealRepository, TestMealPlannerScheduler())
-        presenter.setView(addMealView)
+        activityPresenter = AddMealActivityPresenter(mealRepository, TestMealPlannerScheduler())
+        activityPresenter.setView(addMealView)
     }
 
     @Test
     fun shouldShowErrorGivenNoMealName() {
-        presenter.onConfirmAddMeal("")
+        activityPresenter.onConfirmAddMeal("")
 
         verify(addMealView).showError()
     }
@@ -36,7 +36,7 @@ class AddMealPresenterTest {
     fun shouldSaveMealToDatabaseOnConfirmAddMealGivenMealNameAndMealType() {
         val meal = Meal("Beef Pho")
 
-        presenter.onConfirmAddMeal("Beef Pho")
+        activityPresenter.onConfirmAddMeal("Beef Pho")
 
         verify(mealRepository).insert(meal)
         verify(addMealView).goToMealPlanWithNewMeal(meal)

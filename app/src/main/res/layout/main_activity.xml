@@ -6,12 +6,7 @@
     android:background="@color/lightGrey"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp" />
+    <include layout="@layout/toolbar" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/weekly_plan_recycler_view"

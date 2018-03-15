@@ -2,8 +2,8 @@ package au.com.mealplanner.mealplanner.data.di.module
 
 import au.com.mealplanner.mealplanner.data.MealPlannerScheduler
 import au.com.mealplanner.mealplanner.data.db.repository.MealRepository
-import au.com.mealplanner.mealplanner.feature.addMeal.AddMealPresenter
-import au.com.mealplanner.mealplanner.feature.main.MainActivityPresenter
+import au.com.mealplanner.mealplanner.feature.addMeal.AddMealActivityPresenter
+import au.com.mealplanner.mealplanner.feature.main.WeeklyPlanActivityPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -16,13 +16,13 @@ class ActivityModule {
     }
 
     @Provides
-    fun providesMainActivityPresenter(): MainActivityPresenter {
-        return MainActivityPresenter()
+    fun providesWeeklyPlanActivityPresenter(): WeeklyPlanActivityPresenter {
+        return WeeklyPlanActivityPresenter()
     }
 
     @Provides
-    fun providesAddMealPresenter(mealRepository: MealRepository, mealPlannerScheduler: MealPlannerScheduler): AddMealPresenter {
-        return AddMealPresenter(mealRepository, mealPlannerScheduler)
+    fun providesAddMealActivityPresenter(mealRepository: MealRepository, mealPlannerScheduler: MealPlannerScheduler): AddMealActivityPresenter {
+        return AddMealActivityPresenter(mealRepository, mealPlannerScheduler)
     }
 
 }

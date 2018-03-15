@@ -9,7 +9,7 @@ import android.view.MenuItem
 import au.com.mealplanner.mealplanner.R
 import au.com.mealplanner.mealplanner.base.BaseActivity
 import au.com.mealplanner.mealplanner.data.model.Meal
-import au.com.mealplanner.mealplanner.feature.main.MainActivity
+import au.com.mealplanner.mealplanner.feature.main.WeeklyPlanActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.add_meal_activity.*
 import java.io.Serializable
@@ -17,9 +17,9 @@ import javax.inject.Inject
 
 class AddMealActivity : BaseActivity(), AddMealView {
     override fun goToMealPlanWithNewMeal(meal: Meal) {
-        var intent = Intent(this, MainActivity::class.java)
+        var intent = Intent(this, WeeklyPlanActivity::class.java)
         intent.putExtra("added_meal", meal as Serializable)
-        setResult(RESULT_OK, intent);
+        setResult(RESULT_OK, intent)
         finish()
     }
 
@@ -28,7 +28,7 @@ class AddMealActivity : BaseActivity(), AddMealView {
     }
 
     @Inject
-    lateinit var presenter: AddMealPresenter
+    lateinit var activityPresenter: AddMealActivityPresenter
 
     override fun inject() {
         AndroidInjection.inject(this)
@@ -40,7 +40,7 @@ class AddMealActivity : BaseActivity(), AddMealView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter.setView(this)
+        activityPresenter.setView(this)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_white)
     }
@@ -52,7 +52,7 @@ class AddMealActivity : BaseActivity(), AddMealView {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.confirm_action -> presenter.onConfirmAddMeal(meal_name_editText.text.toString())
+            R.id.confirm_action -> activityPresenter.onConfirmAddMeal(meal_name_editText.text.toString())
         }
         return super.onOptionsItemSelected(item)
     }

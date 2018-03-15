@@ -1,5 +1,6 @@
 package au.com.mealplanner.mealplanner.feature.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -12,9 +13,9 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainView {
+class WeeklyPlanActivity : BaseActivity(), WeeklyPlanView {
     @Inject
-    lateinit var presenter: MainActivityPresenter
+    lateinit var presenter: WeeklyPlanActivityPresenter
 
     private val ADD_MEAL_REQUEST_CODE: Int = 0
 
@@ -51,8 +52,11 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == ADD_MEAL_REQUEST_CODE) {
-            val meal: Meal = data?.extras?.get("added_meal") as Meal
-            Snackbar.make(add_meal_container, "Added Meal" + meal.mealName, Snackbar.LENGTH_LONG).show()
+            if (resultCode == Activity.RESULT_OK) {
+                val meal: Meal = data?.extras?.get("added_meal") as Meal
+
+                Snackbar.make(add_meal_container, "Added Meal" + meal.mealName, Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 }

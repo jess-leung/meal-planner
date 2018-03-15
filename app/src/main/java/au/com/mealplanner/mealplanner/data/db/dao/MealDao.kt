@@ -7,7 +7,7 @@ import au.com.mealplanner.mealplanner.data.model.Meal
 
 
 @Dao
-open interface MealDao {
+interface MealDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(meal: Meal)
 }
