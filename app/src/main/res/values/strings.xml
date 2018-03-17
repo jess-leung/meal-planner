@@ -5,4 +5,5 @@
     <string name="add_meal_btn_text">Add meal</string>
     <string name="name_of_meal_text">Name of meal</string>
     <string name="confirm">Confirm</string>
+    <string name="select_meal_type_dialog_title">"Select meal type</string>
 </resources>
