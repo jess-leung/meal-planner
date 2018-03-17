@@ -1,5 +1,6 @@
 package au.com.mealplanner.mealplanner.feature.main
 
+import au.com.mealplanner.mealplanner.data.model.DayOfWeek
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
@@ -19,8 +20,8 @@ class WeeklyPlanActivityPresenterTest {
 
     @Test
     fun shouldGoToAddMeal() {
-        presenter.goToAddMealActivity()
+        presenter.goToAddMealActivity(DayOfWeek.MONDAY)
 
-        verify(weeklyPlanView).goToAddMeal()
+        verify(weeklyPlanView).goToAddMeal(DayOfWeek.MONDAY)
     }
 }

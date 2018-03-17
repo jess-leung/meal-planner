@@ -9,12 +9,6 @@ import io.reactivex.Maybe
 class AddMealActivityPresenter(private var mealRepository: MealRepository,
                                private var scheduler: MealPlannerScheduler) : BasePresenter<AddMealView>() {
 
-    enum class MealType {
-        BREAKFAST,
-        LUNCH,
-        DINNER,
-        SNACK
-    }
 
     fun onConfirmAddMeal(mealName: String) {
         if (mealName.isEmpty()) {

@@ -7,18 +7,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import au.com.mealplanner.mealplanner.R
+import au.com.mealplanner.mealplanner.data.model.DayOfWeek
 import au.com.mealplanner.mealplanner.feature.main.WeeklyPlanAdapter.WeeklyPlanViewHolder
 
-class WeeklyPlanAdapter(dayOfWeekList: List<String>, presenter: WeeklyPlanActivityPresenter) : RecyclerView.Adapter<WeeklyPlanViewHolder>() {
+class WeeklyPlanAdapter(dayOfWeekList: List<DayOfWeek>, presenter: WeeklyPlanActivityPresenter) : RecyclerView.Adapter<WeeklyPlanViewHolder>() {
 
-    val weekList: List<String> = dayOfWeekList
+    val weekList: List<DayOfWeek> = dayOfWeekList
     val presenter: WeeklyPlanActivityPresenter = presenter
 
     override fun onBindViewHolder(holder: WeeklyPlanViewHolder?, position: Int) {
         val dayOfWeek = weekList.get(position)
-        holder?.dayLabel?.text = dayOfWeek
+        holder?.dayLabel?.text = dayOfWeek.name
         holder?.addMealButton?.setOnClickListener({
-            presenter.goToAddMealActivity()
+            presenter.goToAddMealActivity(dayOfWeek)
         })
     }
 
