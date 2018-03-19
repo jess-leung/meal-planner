@@ -52,10 +52,7 @@ class AddMealTypeDialogFragment : DialogFragment(), AddMealTypeView {
 
     override fun updateWeeklyPlanView() {
         (activity as WeeklyPlanActivity).setUpWeeklyPlanView()
-    }
-
-    fun showSuccessfulCreationOfPlannedMealMessage(meal: Meal, dayOfWeek: DayOfWeek, mealType: MealType) {
-        (activity as WeeklyPlanActivity).showMealAddedSuccess(meal, dayOfWeek, mealType)
+        (activity as WeeklyPlanActivity).showMealAddedSuccess()
     }
 
 }

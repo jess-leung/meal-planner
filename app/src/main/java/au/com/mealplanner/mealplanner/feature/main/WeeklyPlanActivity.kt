@@ -11,7 +11,6 @@ import au.com.mealplanner.mealplanner.base.BaseActivity
 import au.com.mealplanner.mealplanner.data.db.dao.PlannedMealDao
 import au.com.mealplanner.mealplanner.data.model.DayOfWeek
 import au.com.mealplanner.mealplanner.data.model.Meal
-import au.com.mealplanner.mealplanner.data.model.MealType
 import au.com.mealplanner.mealplanner.feature.addMeal.AddMealActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.weekly_plan_activity.*
@@ -19,6 +18,9 @@ import java.io.Serializable
 import javax.inject.Inject
 
 class WeeklyPlanActivity : BaseActivity(), WeeklyPlanView {
+    override fun showError() {
+        Snackbar.make(add_meal_container, "Error getting meal plan", Snackbar.LENGTH_LONG).show()
+    }
 
     @Inject
     lateinit var presenter: WeeklyPlanActivityPresenter
@@ -29,7 +31,8 @@ class WeeklyPlanActivity : BaseActivity(), WeeklyPlanView {
     private val MEAL_DAY_OF_WEEK: String = "DAY_OF_WEEK"
 
     override fun updateWeeklyMealPlan(plannedMeals: List<PlannedMealDao.PlannedMealWithMeal>) {
-
+        weeklyPlanAdapter.setWeeklyPlanData(plannedMeals)
+        weeklyPlanAdapter.notifyDataSetChanged()
     }
 
     override fun setUpWeeklyPlanView() {
@@ -55,10 +58,11 @@ class WeeklyPlanActivity : BaseActivity(), WeeklyPlanView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.setView(this)
-
         weekly_plan_recycler_view.layoutManager = LinearLayoutManager(this)
-        weeklyPlanAdapter = WeeklyPlanAdapter(presenter)
+        weeklyPlanAdapter = WeeklyPlanAdapter(presenter, this)
         weekly_plan_recycler_view.adapter = weeklyPlanAdapter
+
+        presenter.getAllPlannedMeals()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -77,7 +81,7 @@ class WeeklyPlanActivity : BaseActivity(), WeeklyPlanView {
         }
     }
 
-    fun showMealAddedSuccess(meal: Meal, dayOfWeek: DayOfWeek, mealType: MealType) {
-        Snackbar.make(add_meal_container, "Meal added " + meal.mealName + dayOfWeek.name + mealType.name, Snackbar.LENGTH_LONG).show()
+    override fun showMealAddedSuccess() {
+        Snackbar.make(add_meal_container, "Meal added.", Snackbar.LENGTH_LONG).show()
     }
 }

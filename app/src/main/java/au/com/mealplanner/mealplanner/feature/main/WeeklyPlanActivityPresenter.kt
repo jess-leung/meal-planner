@@ -8,7 +8,7 @@ import au.com.mealplanner.mealplanner.data.model.DayOfWeek.*
 
 class WeeklyPlanActivityPresenter(private var plannedMealRepository: PlannedMealRepository,
                                   private var scheduler: MealPlannerScheduler) : BasePresenter<WeeklyPlanView>() {
-    val dayOfWeekList: List<DayOfWeek> = arrayListOf(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY)
+    val dayOfWeekList: ArrayList<DayOfWeek> = arrayListOf(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY)
 
     fun goToAddMealActivity(dayOfWeek: DayOfWeek) {
         getView()?.goToAddMeal(dayOfWeek)
@@ -19,9 +19,10 @@ class WeeklyPlanActivityPresenter(private var plannedMealRepository: PlannedMeal
                 .subscribeOn(scheduler.io())
                 .observeOn(scheduler.ui())
                 .subscribe( {
-                    plannedMeals -> getView()?.updateWeeklyMealPlan(plannedMeals)
+                    plannedMeals ->
+                        getView()?.updateWeeklyMealPlan(plannedMeals)
                 }, {
-
+                        getView()?.showError()
                 })
     }
 

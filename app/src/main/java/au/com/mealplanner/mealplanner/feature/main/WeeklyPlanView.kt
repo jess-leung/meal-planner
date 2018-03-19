@@ -7,4 +7,6 @@ interface WeeklyPlanView {
     fun goToAddMeal(dayOfWeek: DayOfWeek)
     fun updateWeeklyMealPlan(plannedMeals: List<PlannedMealDao.PlannedMealWithMeal>)
     fun setUpWeeklyPlanView()
+    fun showMealAddedSuccess()
+    fun showError()
 }

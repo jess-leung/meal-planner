@@ -23,12 +23,18 @@
             tools:text="@string/monday_label" />
         
         <TextView
+            android:id="@+id/no_meals_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/no_meals_desc"
             android:textColor="@color/colorPrimary"/>
 
+        <LinearLayout
+            android:id="@+id/meals_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
         <Button
             android:id="@+id/add_meal_button"
             android:layout_width="wrap_content"
