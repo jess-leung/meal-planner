@@ -8,9 +8,10 @@ import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import au.com.mealplanner.mealplanner.R
 import au.com.mealplanner.mealplanner.base.BaseActivity
+import au.com.mealplanner.mealplanner.data.db.dao.PlannedMealDao
 import au.com.mealplanner.mealplanner.data.model.DayOfWeek
-import au.com.mealplanner.mealplanner.data.model.DayOfWeek.*
 import au.com.mealplanner.mealplanner.data.model.Meal
+import au.com.mealplanner.mealplanner.data.model.MealType
 import au.com.mealplanner.mealplanner.feature.addMeal.AddMealActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.weekly_plan_activity.*
@@ -18,11 +19,22 @@ import java.io.Serializable
 import javax.inject.Inject
 
 class WeeklyPlanActivity : BaseActivity(), WeeklyPlanView {
+
     @Inject
     lateinit var presenter: WeeklyPlanActivityPresenter
 
+    private lateinit var weeklyPlanAdapter: WeeklyPlanAdapter
+
     private val ADD_MEAL_REQUEST_CODE: Int = 0
     private val MEAL_DAY_OF_WEEK: String = "DAY_OF_WEEK"
+
+    override fun updateWeeklyMealPlan(plannedMeals: List<PlannedMealDao.PlannedMealWithMeal>) {
+
+    }
+
+    override fun setUpWeeklyPlanView() {
+        presenter.getAllPlannedMeals()
+    }
 
     override fun inject() {
         AndroidInjection.inject(this)
@@ -39,35 +51,33 @@ class WeeklyPlanActivity : BaseActivity(), WeeklyPlanView {
         return R.layout.weekly_plan_activity
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.setView(this)
 
-        val dayOfWeekList = ArrayList<DayOfWeek>()
-        dayOfWeekList.add(MONDAY)
-        dayOfWeekList.add(TUESDAY)
-        dayOfWeekList.add(WEDNESDAY)
-        dayOfWeekList.add(THURSDAY)
-        dayOfWeekList.add(FRIDAY)
-        dayOfWeekList.add(SATURDAY)
-        dayOfWeekList.add(SUNDAY)
-
         weekly_plan_recycler_view.layoutManager = LinearLayoutManager(this)
-        weekly_plan_recycler_view.adapter = WeeklyPlanAdapter(dayOfWeekList, presenter)
+        weeklyPlanAdapter = WeeklyPlanAdapter(presenter)
+        weekly_plan_recycler_view.adapter = weeklyPlanAdapter
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == ADD_MEAL_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 val meal: Meal = data?.extras?.get("added_meal") as Meal
+                val dayOfWeek = data?.extras?.get("added_meal_day_of_week") as DayOfWeek
+                var bundle = Bundle()
+                bundle.putSerializable("added_meal_day_of_week", dayOfWeek)
+                bundle.putSerializable("added_meal", meal)
                 val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
                 val addMealTypeDialogFragment = AddMealTypeDialogFragment.newInstance()
+                addMealTypeDialogFragment.arguments = bundle
                 addMealTypeDialogFragment.show(fragmentTransaction, "AddMealDialog")
             }
         }
     }
 
-    fun showMealAddedSuccess() {
-        Snackbar.make(add_meal_container, "Meal added", Snackbar.LENGTH_LONG).show()
+    fun showMealAddedSuccess(meal: Meal, dayOfWeek: DayOfWeek, mealType: MealType) {
+        Snackbar.make(add_meal_container, "Meal added " + meal.mealName + dayOfWeek.name + mealType.name, Snackbar.LENGTH_LONG).show()
     }
 }

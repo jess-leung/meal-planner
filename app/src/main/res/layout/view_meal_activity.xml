@@ -5,4 +5,9 @@
 
     <include layout="@layout/toolbar" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/view_meal_list_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </android.support.constraint.ConstraintLayout>

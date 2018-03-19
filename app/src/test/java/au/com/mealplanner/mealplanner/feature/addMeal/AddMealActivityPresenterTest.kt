@@ -1,6 +1,8 @@
 package au.com.mealplanner.mealplanner.feature.addMeal
 
 import au.com.mealplanner.mealplanner.data.db.repository.MealRepository
+import au.com.mealplanner.mealplanner.data.model.DayOfWeek
+import au.com.mealplanner.mealplanner.data.model.DayOfWeek.*
 import au.com.mealplanner.mealplanner.data.model.Meal
 import au.com.mealplanner.mealplanner.testUtil.TestMealPlannerScheduler
 import org.junit.Before
@@ -27,7 +29,7 @@ class AddMealActivityPresenterTest {
 
     @Test
     fun shouldShowErrorGivenNoMealName() {
-        activityPresenter.onConfirmAddMeal("")
+        activityPresenter.onConfirmAddMeal("", MONDAY)
 
         verify(addMealView).showError()
     }
@@ -36,9 +38,9 @@ class AddMealActivityPresenterTest {
     fun shouldSaveMealToDatabaseOnConfirmAddMealGivenMealNameAndMealType() {
         val meal = Meal("Beef Pho")
 
-        activityPresenter.onConfirmAddMeal("Beef Pho")
+        activityPresenter.onConfirmAddMeal("Beef Pho", MONDAY)
 
         verify(mealRepository).insert(meal)
-        verify(addMealView).goToMealPlanWithNewMeal(meal)
+        verify(addMealView).goToMealPlanWithNewMeal(meal, MONDAY)
     }
 }

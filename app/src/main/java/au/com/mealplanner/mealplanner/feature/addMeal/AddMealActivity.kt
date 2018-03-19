@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import au.com.mealplanner.mealplanner.R
 import au.com.mealplanner.mealplanner.base.BaseActivity
+import au.com.mealplanner.mealplanner.data.model.DayOfWeek
 import au.com.mealplanner.mealplanner.data.model.Meal
 import au.com.mealplanner.mealplanner.feature.main.WeeklyPlanActivity
 import dagger.android.AndroidInjection
@@ -16,9 +17,10 @@ import java.io.Serializable
 import javax.inject.Inject
 
 class AddMealActivity : BaseActivity(), AddMealView {
-    override fun goToMealPlanWithNewMeal(meal: Meal) {
+    override fun goToMealPlanWithNewMeal(meal: Meal, dayOfWeek: DayOfWeek) {
         var intent = Intent(this, WeeklyPlanActivity::class.java)
         intent.putExtra("added_meal", meal as Serializable)
+        intent.putExtra("added_meal_day_of_week", dayOfWeek as Serializable)
         setResult(RESULT_OK, intent)
         finish()
     }
@@ -38,9 +40,12 @@ class AddMealActivity : BaseActivity(), AddMealView {
         make(add_meal_container, "Oops", LENGTH_LONG).show()
     }
 
+    private lateinit var dayOfWeek: DayOfWeek
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityPresenter.setView(this)
+        dayOfWeek = intent.extras.get("DAY_OF_WEEK") as DayOfWeek
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_white)
     }
@@ -52,7 +57,7 @@ class AddMealActivity : BaseActivity(), AddMealView {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.confirm_action -> activityPresenter.onConfirmAddMeal(meal_name_editText.text.toString())
+            R.id.confirm_action -> activityPresenter.onConfirmAddMeal(meal_name_editText.text.toString(), dayOfWeek)
         }
         return super.onOptionsItemSelected(item)
     }
